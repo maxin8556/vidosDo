@@ -35,9 +35,11 @@ class WeiBoMiaoPai(object):
         titleLink_list = self.public.getUrl()
         logging.info("需要解析视频个数<--->{}".format(len(titleLink_list)))
         download_info = []
+        i = 0
         for titleLink in titleLink_list:
+            i += 1
             title, link = titleLink
-            logging.info("开始解析视频<--->{}".format(title))
+            logging.info("开始解析第 {} 视频<--->{}".format(i, title))
             # 编码URL
             resultLink = self.public.urlDecode(link)
             try:
@@ -55,22 +57,24 @@ class WeiBoMiaoPai(object):
                 else:
                     download_url = "解析失败"
                     items = {
+
                         "title": download_title,
                         "vidosUrl": download_url
                     }
                     download_info.append(items)
             except:
                 logging.error("未知错误")
+                items = {
+                    "title": "未知错误",
+                    "vidosUrl": "未知错误"
+                }
+                download_info.append(items)
 
         self.public.writeFile(self.path, download_info)
         return download_info
 
-
-
-
     def main(self):
-        a = self.getVidosUrl()
-        print(a)
+        self.getVidosUrl()
 
 
 if __name__ == '__main__':

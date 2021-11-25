@@ -24,7 +24,7 @@ class PublicMethod(object):
         with closing(requests.get(url, stream=True)) as r:
             chunk_size = 1024
             content_size = int(r.headers['content-length'])
-            logging.info('下载开始')
+            logging.info('=================下载开始')
             print(path)
             with open(path, "wb") as f:
                 n = 1
@@ -33,7 +33,7 @@ class PublicMethod(object):
                     f.write(chunk)
                     # print('已下载{0:%}'.format(loaded))
                     # n += 1
-            logging.info("下载完成")
+            logging.info("################下载完成")
 
     # 获取全部的视频链接和标题
     def getUrl(self):
